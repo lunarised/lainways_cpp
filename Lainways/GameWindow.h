@@ -41,7 +41,7 @@ namespace Lainways {
 
 	private: System::Windows::Forms::Label^  classLabel;
 	private: System::Windows::Forms::Label^  classShow;
-	private: System::Windows::Forms::Label^  seedShow;
+
 
 
 
@@ -49,6 +49,12 @@ namespace Lainways {
 
 
 	private: System::Windows::Forms::Label^  difficultyShow;
+	private: System::Windows::Forms::TextBox^  textBox1;
+	private: System::Windows::Forms::Label^  eNameLabel;
+	private: System::Windows::Forms::Label^  scorelab;
+	private: System::Windows::Forms::Label^  startlab;
+
+
 
 	protected:
 
@@ -65,31 +71,17 @@ namespace Lainways {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::Label^  beginLabel;
 			this->gameTitle = (gcnew System::Windows::Forms::Label());
 			this->difficultyLabel = (gcnew System::Windows::Forms::Label());
 			this->seedLabel = (gcnew System::Windows::Forms::Label());
 			this->classLabel = (gcnew System::Windows::Forms::Label());
 			this->classShow = (gcnew System::Windows::Forms::Label());
-			this->seedShow = (gcnew System::Windows::Forms::Label());
 			this->difficultyShow = (gcnew System::Windows::Forms::Label());
-			beginLabel = (gcnew System::Windows::Forms::Label());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->eNameLabel = (gcnew System::Windows::Forms::Label());
+			this->scorelab = (gcnew System::Windows::Forms::Label());
+			this->startlab = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
-			// 
-			// beginLabel
-			// 
-			beginLabel->AutoSize = true;
-			beginLabel->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(44)), static_cast<System::Int32>(static_cast<System::Byte>(44)),
-				static_cast<System::Int32>(static_cast<System::Byte>(44)));
-			beginLabel->Cursor = System::Windows::Forms::Cursors::Default;
-			beginLabel->Font = (gcnew System::Drawing::Font(L"MV Boli", 48, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			beginLabel->ForeColor = System::Drawing::Color::Silver;
-			beginLabel->Location = System::Drawing::Point(294, 467);
-			beginLabel->Name = L"beginLabel";
-			beginLabel->Size = System::Drawing::Size(192, 85);
-			beginLabel->TabIndex = 4;
-			beginLabel->Text = L"Begin";
 			// 
 			// gameTitle
 			// 
@@ -150,25 +142,12 @@ namespace Lainways {
 			this->classShow->Font = (gcnew System::Drawing::Font(L"MV Boli", 27.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->classShow->ForeColor = System::Drawing::Color::Silver;
-			this->classShow->Location = System::Drawing::Point(500, 213);
+			this->classShow->Location = System::Drawing::Point(547, 213);
 			this->classShow->Name = L"classShow";
 			this->classShow->Size = System::Drawing::Size(171, 49);
 			this->classShow->TabIndex = 5;
 			this->classShow->Text = L"Engineer";
 			this->classShow->Click += gcnew System::EventHandler(this, &GameWindow::classShow_Click);
-			// 
-			// seedShow
-			// 
-			this->seedShow->Anchor = System::Windows::Forms::AnchorStyles::Top;
-			this->seedShow->AutoSize = true;
-			this->seedShow->Font = (gcnew System::Drawing::Font(L"MV Boli", 27.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->seedShow->ForeColor = System::Drawing::Color::Silver;
-			this->seedShow->Location = System::Drawing::Point(500, 296);
-			this->seedShow->Name = L"seedShow";
-			this->seedShow->Size = System::Drawing::Size(193, 49);
-			this->seedShow->TabIndex = 6;
-			this->seedShow->Text = L"         ";
 			// 
 			// difficultyShow
 			// 
@@ -177,11 +156,60 @@ namespace Lainways {
 			this->difficultyShow->Font = (gcnew System::Drawing::Font(L"MV Boli", 27.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->difficultyShow->ForeColor = System::Drawing::Color::Silver;
-			this->difficultyShow->Location = System::Drawing::Point(500, 372);
+			this->difficultyShow->Location = System::Drawing::Point(609, 372);
 			this->difficultyShow->Name = L"difficultyShow";
 			this->difficultyShow->Size = System::Drawing::Size(101, 49);
 			this->difficultyShow->TabIndex = 7;
 			this->difficultyShow->Text = L"Easy";
+			// 
+			// textBox1
+			// 
+			this->textBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(22)), static_cast<System::Int32>(static_cast<System::Byte>(22)),
+				static_cast<System::Int32>(static_cast<System::Byte>(22)));
+			this->textBox1->Font = (gcnew System::Drawing::Font(L"MV Boli", 18, System::Drawing::FontStyle::Bold));
+			this->textBox1->ForeColor = System::Drawing::Color::Silver;
+			this->textBox1->Location = System::Drawing::Point(329, 299);
+			this->textBox1->MaxLength = 24;
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(389, 46);
+			this->textBox1->TabIndex = 8;
+			this->textBox1->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
+			// 
+			// eNameLabel
+			// 
+			this->eNameLabel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->eNameLabel->Font = (gcnew System::Drawing::Font(L"MV Boli", 20, System::Drawing::FontStyle::Bold));
+			this->eNameLabel->ForeColor = System::Drawing::Color::Silver;
+			this->eNameLabel->Location = System::Drawing::Point(15, 9);
+			this->eNameLabel->Name = L"eNameLabel";
+			this->eNameLabel->Size = System::Drawing::Size(249, 37);
+			this->eNameLabel->TabIndex = 9;
+			this->eNameLabel->Text = L"O";
+			this->eNameLabel->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			// 
+			// scorelab
+			// 
+			this->scorelab->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->scorelab->Font = (gcnew System::Drawing::Font(L"MV Boli", 20, System::Drawing::FontStyle::Bold));
+			this->scorelab->ForeColor = System::Drawing::Color::Silver;
+			this->scorelab->Location = System::Drawing::Point(523, 9);
+			this->scorelab->Name = L"scorelab";
+			this->scorelab->Size = System::Drawing::Size(249, 37);
+			this->scorelab->TabIndex = 10;
+			this->scorelab->Text = L"O";
+			this->scorelab->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
+			// 
+			// startlab
+			// 
+			this->startlab->AutoSize = true;
+			this->startlab->Font = (gcnew System::Drawing::Font(L"MV Boli", 32, System::Drawing::FontStyle::Bold));
+			this->startlab->ForeColor = System::Drawing::Color::Silver;
+			this->startlab->Location = System::Drawing::Point(341, 480);
+			this->startlab->Name = L"startlab";
+			this->startlab->Size = System::Drawing::Size(131, 55);
+			this->startlab->TabIndex = 11;
+			this->startlab->Text = L"Begin";
+			this->startlab->Click += gcnew System::EventHandler(this, &GameWindow::startlab_Click);
 			// 
 			// GameWindow
 			// 
@@ -190,16 +218,19 @@ namespace Lainways {
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(22)), static_cast<System::Int32>(static_cast<System::Byte>(22)),
 				static_cast<System::Int32>(static_cast<System::Byte>(22)));
 			this->ClientSize = System::Drawing::Size(784, 561);
+			this->Controls->Add(this->startlab);
+			this->Controls->Add(this->scorelab);
+			this->Controls->Add(this->eNameLabel);
+			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->difficultyShow);
-			this->Controls->Add(this->seedShow);
 			this->Controls->Add(this->classShow);
-			this->Controls->Add(beginLabel);
 			this->Controls->Add(this->classLabel);
 			this->Controls->Add(this->seedLabel);
 			this->Controls->Add(this->difficultyLabel);
 			this->Controls->Add(this->gameTitle);
 			this->Name = L"GameWindow";
 			this->Text = L"GameWindow";
+			this->Load += gcnew System::EventHandler(this, &GameWindow::GameWindow_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -216,5 +247,43 @@ private: System::Void classOnClick() {
 private: System::Void diffOnClick() {
 
 		 }
+
+private: System::Void GameWindow_Load(System::Object^  sender, System::EventArgs^  e) {
+	menuLabel();
+
+}
+private: System::Void beginLabel_Click(System::Object^  sender, System::EventArgs^  e) {
+	gameLabel();
+
+}
+
+private: System::Void gameLabel() {
+	scorelab->Visible = true;
+	eNameLabel->Visible = true;
+	classLabel->Visible = false;
+	classShow->Visible = false;
+	seedLabel->Visible = false;
+	textBox1->Visible = false;
+	gameTitle->Visible = false;
+	difficultyLabel->Visible = false;
+	difficultyShow->Visible = false;
+	startlab->Visible = false;
+}
+private: System::Void menuLabel() {
+	scorelab->Visible = false;
+	eNameLabel->Visible = false;
+	classLabel->Visible = true;
+	classShow->Visible = true;
+	seedLabel->Visible = true;
+	textBox1->Visible = true;
+	gameTitle->Visible = true;
+	difficultyLabel->Visible = true;
+	difficultyShow->Visible = true;
+	startlab->Visible = true;
+}
+private: System::Void startlab_Click(System::Object^  sender, System::EventArgs^  e) {
+	gameLabel();
+	eNameLabel->Text = textBox1->Text;
+}
 };
 }
