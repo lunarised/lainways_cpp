@@ -54,6 +54,7 @@ namespace Lainways {
 	private: System::Windows::Forms::Label^  eNameLabel;
 	private: System::Windows::Forms::Label^  scorelab;
 	private: System::Windows::Forms::Label^  startlab;
+	private: System::Windows::Forms::Panel^  gamePanel;
 
 
 
@@ -72,6 +73,7 @@ namespace Lainways {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(GameWindow::typeid));
 			this->gameTitle = (gcnew System::Windows::Forms::Label());
 			this->difficultyLabel = (gcnew System::Windows::Forms::Label());
 			this->seedLabel = (gcnew System::Windows::Forms::Label());
@@ -82,6 +84,7 @@ namespace Lainways {
 			this->eNameLabel = (gcnew System::Windows::Forms::Label());
 			this->scorelab = (gcnew System::Windows::Forms::Label());
 			this->startlab = (gcnew System::Windows::Forms::Label());
+			this->gamePanel = (gcnew System::Windows::Forms::Panel());
 			this->SuspendLayout();
 			// 
 			// gameTitle
@@ -90,7 +93,7 @@ namespace Lainways {
 			this->gameTitle->Font = (gcnew System::Drawing::Font(L"MV Boli", 48, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->gameTitle->ForeColor = System::Drawing::Color::Silver;
-			this->gameTitle->Location = System::Drawing::Point(235, 21);
+			this->gameTitle->Location = System::Drawing::Point(486, 25);
 			this->gameTitle->Name = L"gameTitle";
 			this->gameTitle->Size = System::Drawing::Size(310, 85);
 			this->gameTitle->TabIndex = 0;
@@ -103,7 +106,7 @@ namespace Lainways {
 			this->difficultyLabel->Font = (gcnew System::Drawing::Font(L"MV Boli", 27.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->difficultyLabel->ForeColor = System::Drawing::Color::Silver;
-			this->difficultyLabel->Location = System::Drawing::Point(12, 372);
+			this->difficultyLabel->Location = System::Drawing::Point(12, 256);
 			this->difficultyLabel->Name = L"difficultyLabel";
 			this->difficultyLabel->Size = System::Drawing::Size(335, 49);
 			this->difficultyLabel->TabIndex = 1;
@@ -116,7 +119,7 @@ namespace Lainways {
 			this->seedLabel->Font = (gcnew System::Drawing::Font(L"MV Boli", 27.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->seedLabel->ForeColor = System::Drawing::Color::Silver;
-			this->seedLabel->Location = System::Drawing::Point(12, 296);
+			this->seedLabel->Location = System::Drawing::Point(12, 468);
 			this->seedLabel->Name = L"seedLabel";
 			this->seedLabel->Size = System::Drawing::Size(248, 49);
 			this->seedLabel->TabIndex = 2;
@@ -129,7 +132,7 @@ namespace Lainways {
 			this->classLabel->Font = (gcnew System::Drawing::Font(L"MV Boli", 27.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->classLabel->ForeColor = System::Drawing::Color::Silver;
-			this->classLabel->Location = System::Drawing::Point(12, 213);
+			this->classLabel->Location = System::Drawing::Point(12, 152);
 			this->classLabel->Name = L"classLabel";
 			this->classLabel->Size = System::Drawing::Size(249, 49);
 			this->classLabel->TabIndex = 3;
@@ -143,7 +146,7 @@ namespace Lainways {
 			this->classShow->Font = (gcnew System::Drawing::Font(L"MV Boli", 27.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->classShow->ForeColor = System::Drawing::Color::Silver;
-			this->classShow->Location = System::Drawing::Point(547, 213);
+			this->classShow->Location = System::Drawing::Point(1098, 152);
 			this->classShow->Name = L"classShow";
 			this->classShow->Size = System::Drawing::Size(171, 49);
 			this->classShow->TabIndex = 5;
@@ -157,7 +160,7 @@ namespace Lainways {
 			this->difficultyShow->Font = (gcnew System::Drawing::Font(L"MV Boli", 27.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->difficultyShow->ForeColor = System::Drawing::Color::Silver;
-			this->difficultyShow->Location = System::Drawing::Point(609, 372);
+			this->difficultyShow->Location = System::Drawing::Point(1151, 256);
 			this->difficultyShow->Name = L"difficultyShow";
 			this->difficultyShow->Size = System::Drawing::Size(101, 49);
 			this->difficultyShow->TabIndex = 7;
@@ -169,7 +172,7 @@ namespace Lainways {
 				static_cast<System::Int32>(static_cast<System::Byte>(22)));
 			this->textBox1->Font = (gcnew System::Drawing::Font(L"MV Boli", 18, System::Drawing::FontStyle::Bold));
 			this->textBox1->ForeColor = System::Drawing::Color::Silver;
-			this->textBox1->Location = System::Drawing::Point(329, 299);
+			this->textBox1->Location = System::Drawing::Point(863, 468);
 			this->textBox1->MaxLength = 24;
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(389, 46);
@@ -181,10 +184,11 @@ namespace Lainways {
 			this->eNameLabel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->eNameLabel->Font = (gcnew System::Drawing::Font(L"MV Boli", 20, System::Drawing::FontStyle::Bold));
 			this->eNameLabel->ForeColor = System::Drawing::Color::Silver;
-			this->eNameLabel->Location = System::Drawing::Point(15, 9);
+			this->eNameLabel->Location = System::Drawing::Point(12, 2);
 			this->eNameLabel->Name = L"eNameLabel";
 			this->eNameLabel->Size = System::Drawing::Size(457, 37);
 			this->eNameLabel->TabIndex = 9;
+			this->eNameLabel->Text = L"THIS IS TO MARK LOCATION";
 			this->eNameLabel->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
 			// scorelab
@@ -192,7 +196,7 @@ namespace Lainways {
 			this->scorelab->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->scorelab->Font = (gcnew System::Drawing::Font(L"MV Boli", 20, System::Drawing::FontStyle::Bold));
 			this->scorelab->ForeColor = System::Drawing::Color::Silver;
-			this->scorelab->Location = System::Drawing::Point(523, 9);
+			this->scorelab->Location = System::Drawing::Point(1003, 2);
 			this->scorelab->Name = L"scorelab";
 			this->scorelab->Size = System::Drawing::Size(249, 37);
 			this->scorelab->TabIndex = 10;
@@ -204,12 +208,20 @@ namespace Lainways {
 			this->startlab->AutoSize = true;
 			this->startlab->Font = (gcnew System::Drawing::Font(L"MV Boli", 32, System::Drawing::FontStyle::Bold));
 			this->startlab->ForeColor = System::Drawing::Color::Silver;
-			this->startlab->Location = System::Drawing::Point(341, 480);
+			this->startlab->Location = System::Drawing::Point(597, 602);
 			this->startlab->Name = L"startlab";
 			this->startlab->Size = System::Drawing::Size(131, 55);
 			this->startlab->TabIndex = 11;
 			this->startlab->Text = L"Begin";
 			this->startlab->Click += gcnew System::EventHandler(this, &GameWindow::startlab_Click);
+			// 
+			// gamePanel
+			// 
+			this->gamePanel->BackColor = System::Drawing::Color::Coral;
+			this->gamePanel->Location = System::Drawing::Point(240, 39);
+			this->gamePanel->Name = L"gamePanel";
+			this->gamePanel->Size = System::Drawing::Size(800, 600);
+			this->gamePanel->TabIndex = 12;
 			// 
 			// GameWindow
 			// 
@@ -217,7 +229,8 @@ namespace Lainways {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(22)), static_cast<System::Int32>(static_cast<System::Byte>(22)),
 				static_cast<System::Int32>(static_cast<System::Byte>(22)));
-			this->ClientSize = System::Drawing::Size(784, 561);
+			this->ClientSize = System::Drawing::Size(1264, 681);
+			this->Controls->Add(this->gamePanel);
 			this->Controls->Add(this->startlab);
 			this->Controls->Add(this->scorelab);
 			this->Controls->Add(this->eNameLabel);
@@ -228,8 +241,10 @@ namespace Lainways {
 			this->Controls->Add(this->seedLabel);
 			this->Controls->Add(this->difficultyLabel);
 			this->Controls->Add(this->gameTitle);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"GameWindow";
-			this->Text = L"GameWindow";
+			this->Text = L"Lainways_";
 			this->Load += gcnew System::EventHandler(this, &GameWindow::GameWindow_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -291,14 +306,12 @@ private: System::Void gameInitialize() {
 	if (String::IsNullOrWhiteSpace(textBox1->Text)) {
 		gCon->genName();
 		eNameLabel->Text = gCon->seedName;
-		
-
 	}
 	else {
-		//eNameLabel->Text = "OOF";
-		eNameLabel->Text = "Foo" + eNameLabel->Text + "Foo";
-		
+		eNameLabel->Text = textBox1->Text;
 	}
+	gCon->seedGen(gCon->seedName);
+
 }
 };
 }

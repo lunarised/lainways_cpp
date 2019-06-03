@@ -21,7 +21,6 @@ void Controller::seedGen(String^ inpString) {
 }
 
  void Controller::genName(){
-	String^ b;
 	srand(time(0));
 	int p = rand()%72;
 	int s = rand()%59;
