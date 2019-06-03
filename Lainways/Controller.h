@@ -9,6 +9,7 @@ ref class Controller
 {
 public:
 	Controller();
-	int seedGen(String^ inpString);
+	void seedGen(String^ inpString);
+	String^ genName();
 };
 

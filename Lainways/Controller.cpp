@@ -5,7 +5,7 @@
 Controller::Controller()
 {
 }
-int Controller::seedGen(String^ inpString) {
+void Controller::seedGen(String^ inpString) {
 	inpString = inpString->ToLower();
 	int n = 0;
 	for (int i = 0; i < inpString->Length; i++) {
@@ -17,4 +17,11 @@ int Controller::seedGen(String^ inpString) {
 	}
 	n %= 716559;
 	srand(n);
+}
+
+String^ Controller::genName(){
+	String^ b;
+	int f = rand();
+	b = f.ToString();
+	return b;
 }
