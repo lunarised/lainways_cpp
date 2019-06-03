@@ -1,10 +1,11 @@
 #include "Controller.h"
 #include <cstdlib> 
-
+#include <time.h>
 
 Controller::Controller()
 {
 }
+
 void Controller::seedGen(String^ inpString) {
 	inpString = inpString->ToLower();
 	int n = 0;
@@ -19,9 +20,20 @@ void Controller::seedGen(String^ inpString) {
 	srand(n);
 }
 
-String^ Controller::genName(){
+ void Controller::genName(){
 	String^ b;
-	int f = rand();
-	b = f.ToString();
-	return b;
+	srand(time(0));
+	int p = rand()%72;
+	int s = rand()%59;
+	System::IO::StreamReader^ sr = System::IO::File::OpenText("p.txt");
+	for (int i = 0; i < p; i++){
+		sr->ReadLine();
+	}
+	String^ pr = sr->ReadLine();
+	System::IO::StreamReader^ srs = System::IO::File::OpenText("s.txt");
+	for (int i = 0; i < s; i++) {
+		srs->ReadLine();
+	}
+	String^ su = srs->ReadLine();
+	seedName = (pr + " " + su);
 }

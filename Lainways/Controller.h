@@ -10,6 +10,7 @@ ref class Controller
 public:
 	Controller();
 	void seedGen(String^ inpString);
-	String^ genName();
+	void genName();
+	property String^ seedName;
 };
 

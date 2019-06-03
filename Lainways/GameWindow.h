@@ -183,7 +183,7 @@ namespace Lainways {
 			this->eNameLabel->ForeColor = System::Drawing::Color::Silver;
 			this->eNameLabel->Location = System::Drawing::Point(15, 9);
 			this->eNameLabel->Name = L"eNameLabel";
-			this->eNameLabel->Size = System::Drawing::Size(249, 37);
+			this->eNameLabel->Size = System::Drawing::Size(457, 37);
 			this->eNameLabel->TabIndex = 9;
 			this->eNameLabel->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
@@ -288,8 +288,10 @@ private: System::Void startlab_Click(System::Object^  sender, System::EventArgs^
 private: System::Void gameInitialize() {
 	Controller^ gCon = gcnew Controller();
 	gameLabel();
-	if (String::IsNullOrEmpty(textBox1->Text)) {
-		//GET RANDOM 
+	if (String::IsNullOrWhiteSpace(textBox1->Text)) {
+		gCon->genName();
+		eNameLabel->Text = gCon->seedName;
+		
 
 	}
 	else {
