@@ -1,4 +1,5 @@
 #pragma once
+#include "Controller.h"
 
 namespace Lainways {
 
@@ -184,7 +185,6 @@ namespace Lainways {
 			this->eNameLabel->Name = L"eNameLabel";
 			this->eNameLabel->Size = System::Drawing::Size(249, 37);
 			this->eNameLabel->TabIndex = 9;
-			this->eNameLabel->Text = L"O";
 			this->eNameLabel->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
 			// scorelab
@@ -282,8 +282,21 @@ private: System::Void menuLabel() {
 	startlab->Visible = true;
 }
 private: System::Void startlab_Click(System::Object^  sender, System::EventArgs^  e) {
+	gameInitialize();
+	
+}
+private: System::Void gameInitialize() {
+	Controller^ gCon = gcnew Controller();
 	gameLabel();
-	eNameLabel->Text = textBox1->Text;
+	if (String::IsNullOrEmpty(textBox1->Text)) {
+		//GET RANDOM 
+
+	}
+	else {
+		//eNameLabel->Text = "OOF";
+		eNameLabel->Text = "Foo" + eNameLabel->Text + "Foo";
+		
+	}
 }
 };
 }
