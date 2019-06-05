@@ -21,3 +21,4 @@ Used as a Programming Project for my Bachelor of IT at Otago Polytechnic
 ## Currently Implemented
 * Start Screen
 * Random Corp Generator
+* Random seed Generator for String Seed Input
