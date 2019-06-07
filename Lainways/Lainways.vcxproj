@@ -133,14 +133,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameWindow.cpp" />
+    <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Controller.h" />
+    <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameWindow.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Tile.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GameWindow.resx">

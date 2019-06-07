@@ -1,5 +1,5 @@
 #pragma once
-#include "Controller.h"
+#include "GameEngine.h"
 
 namespace Lainways {
 
@@ -50,7 +50,7 @@ namespace Lainways {
 	Graphics^ bufferCanvas;
 	Bitmap^ bufferBMP;
 	SolidBrush^ fill;
-	Controller^ gCon;
+	GameEngine^ gCon;
 	Image^ osI;
 	private: System::Windows::Forms::Timer^  timer1;
 	private: System::ComponentModel::IContainer^  components;
@@ -243,6 +243,7 @@ namespace Lainways {
 			this->Controls->Add(this->seedLabel);
 			this->Controls->Add(this->difficultyLabel);
 			this->Controls->Add(this->gameTitle);
+			this->DoubleBuffered = true;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"GameWindow";
@@ -310,7 +311,7 @@ private: System::Void startlab_Click(System::Object^  sender, System::EventArgs^
 	canvas = gamePanel->CreateGraphics();
 
 
-	gCon = gcnew Controller(bufferCanvas);
+	gCon = gcnew GameEngine(bufferCanvas);
 	
 
 
