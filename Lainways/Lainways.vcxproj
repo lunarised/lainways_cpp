@@ -136,6 +136,7 @@
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileSet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine.h" />
@@ -143,6 +144,7 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileSet.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GameWindow.resx">
