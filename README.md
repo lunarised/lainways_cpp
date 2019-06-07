@@ -16,3 +16,9 @@ Used as a Programming Project for my Bachelor of IT at Otago Polytechnic
 * Rewrite in GNU C++ or C
 * Add Functionality
 * Implement in [Reimi](https://git.lain.church/tA/reimi "Reimi Roguelike Engine")
+
+
+## Currently Implemented
+* Start Screen
+* Random Corp Generator
+* Random seed Generator for String Seed Input
