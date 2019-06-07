@@ -7,10 +7,20 @@ using namespace System::Data;
 using namespace System::Drawing;
 ref class Controller
 {
+private:
+	Color^ c;
+
+	
+	Graphics^ canvas;
+	SolidBrush^ fill;
 public:
-	Controller();
+	Controller(Graphics^ _canvas);
 	void seedGen(String^ inpString);
 	void genName();
+	void draw();
 	property String^ seedName;
 };
+
+
+
 

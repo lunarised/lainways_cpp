@@ -38,33 +38,28 @@ namespace Lainways {
 	private: System::Windows::Forms::Label^  gameTitle;
 	private: System::Windows::Forms::Label^  difficultyLabel;
 	private: System::Windows::Forms::Label^  seedLabel;
-
-
 	private: System::Windows::Forms::Label^  classLabel;
 	private: System::Windows::Forms::Label^  classShow;
-
-
-
-
-
-
-
 	private: System::Windows::Forms::Label^  difficultyShow;
 	private: System::Windows::Forms::TextBox^  textBox1;
 	private: System::Windows::Forms::Label^  eNameLabel;
 	private: System::Windows::Forms::Label^  scorelab;
 	private: System::Windows::Forms::Label^  startlab;
 	private: System::Windows::Forms::Panel^  gamePanel;
-
-
-
+	Graphics^ canvas;
+	Graphics^ bufferCanvas;
+	Bitmap^ bufferBMP;
+	SolidBrush^ fill;
+	Controller^ gCon;
+	Image^ osI;
+	private: System::Windows::Forms::Timer^  timer1;
+	private: System::ComponentModel::IContainer^  components;
 	protected:
-
 	private:
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -73,6 +68,7 @@ namespace Lainways {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(GameWindow::typeid));
 			this->gameTitle = (gcnew System::Windows::Forms::Label());
 			this->difficultyLabel = (gcnew System::Windows::Forms::Label());
@@ -85,6 +81,7 @@ namespace Lainways {
 			this->scorelab = (gcnew System::Windows::Forms::Label());
 			this->startlab = (gcnew System::Windows::Forms::Label());
 			this->gamePanel = (gcnew System::Windows::Forms::Panel());
+			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SuspendLayout();
 			// 
 			// gameTitle
@@ -223,6 +220,11 @@ namespace Lainways {
 			this->gamePanel->Size = System::Drawing::Size(800, 600);
 			this->gamePanel->TabIndex = 12;
 			// 
+			// timer1
+			// 
+			this->timer1->Interval = 16;
+			this->timer1->Tick += gcnew System::EventHandler(this, &GameWindow::timer1_Tick);
+			// 
 			// GameWindow
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -264,6 +266,7 @@ private: System::Void diffOnClick() {
 		 }
 
 private: System::Void GameWindow_Load(System::Object^  sender, System::EventArgs^  e) {
+	timer1->Enabled = false;
 	menuLabel();
 
 }
@@ -283,6 +286,8 @@ private: System::Void gameLabel() {
 	difficultyLabel->Visible = false;
 	difficultyShow->Visible = false;
 	startlab->Visible = false;
+	gamePanel->Visible = true;
+	timer1->Enabled = true;
 }
 private: System::Void menuLabel() {
 	scorelab->Visible = false;
@@ -295,23 +300,39 @@ private: System::Void menuLabel() {
 	difficultyLabel->Visible = true;
 	difficultyShow->Visible = true;
 	startlab->Visible = true;
+	gamePanel->Visible = false;
+	timer1->Enabled = false;
 }
 private: System::Void startlab_Click(System::Object^  sender, System::EventArgs^  e) {
-	gameInitialize();
+	osI = Image::FromFile("bgI.png");
+	bufferBMP = gcnew Bitmap(800, 600);
+	bufferCanvas = Graphics::FromImage(bufferBMP);
+	canvas = gamePanel->CreateGraphics();
+
+
+	gCon = gcnew Controller(bufferCanvas);
 	
-}
-private: System::Void gameInitialize() {
-	Controller^ gCon = gcnew Controller();
-	gameLabel();
+
+
 	if (String::IsNullOrWhiteSpace(textBox1->Text)) {
 		gCon->genName();
 		eNameLabel->Text = gCon->seedName;
 	}
 	else {
+		gCon->seedName = textBox1->Text;
 		eNameLabel->Text = textBox1->Text;
 	}
-	gCon->seedGen(gCon->seedName);
 
+
+	gCon->seedGen(gCon->seedName);
+	gameLabel();
+	
+}
+private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
+	bufferCanvas->DrawImage(osI, 0, 0, 800, 600);
+	gCon->draw();
+
+	canvas->DrawImage(bufferBMP, 0, 0, 800, 600);
 }
 };
 }
