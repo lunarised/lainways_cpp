@@ -25,4 +25,4 @@ Used as a Programming Project for my Bachelor of IT at Otago Polytechnic
 * Implemented Basic Tiles
 * Implemented Tile Sets
 * Implemented Double Buffering
-
+* Icons
