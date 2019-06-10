@@ -22,3 +22,10 @@ Used as a Programming Project for my Bachelor of IT at Otago Polytechnic
 * Start Screen
 * Random Corp Generator
 * Random seed Generator for String Seed Input
+
+=======
+* Implemented Basic Tiles
+* Implemented Tile Sets
+* Implemented Double Buffering
+* Icons
+
