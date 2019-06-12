@@ -18,7 +18,6 @@ private:
 public:
 	TileMap(TileSet^ _tileSet, Graphics^ _startCanvas, int _startNRows, int _startNCols);
 	void SetMapEntry(int _col, int _row, int _tileIndex);
-	void LoadMapFromFile(String^ filename);
 	void GenerateMap(int _ncols, int _nrows);
 	void GenerateRoom(int _x, int _y, int _width, int _height);
 	int GetMapEntry(int _col, int _row);
@@ -29,6 +28,6 @@ public:
 	int nCols;
  int nRows;
 	const int NROOMS = 225;
-	void Polnareff();
+	void PoissonGen();
 };
 

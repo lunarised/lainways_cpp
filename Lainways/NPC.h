@@ -21,6 +21,7 @@ public:
 	property int xPos;
 	property int yPos;
 	property int Type;
+	property int health;
 
 public:
 	NPC(Graphics^ _canvas, Bitmap^ _spriteSheet, int _frameWidth, int _frameHeight, int _nFrames, int _xPos, int _yPos, int type);

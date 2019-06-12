@@ -13,6 +13,9 @@ NPC::NPC(Graphics^ _canvas, Bitmap^ _spriteSheet, int _frameWidth, int _frameHei
 	yPos = _yPos;
 	Type = _Type;
 	direction = rand() % 4;
+	if (_Type == 1) {
+		health = rand() % 10 + 1;
+	}
 
 }
 void NPC::draw(int _xVP, int _yVP) {

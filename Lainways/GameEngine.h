@@ -32,7 +32,7 @@ public:
 	property int score;
 	void Lose();
 	void MapGen();
-	void PlayerHit();
+	void PlayerHit(int _x, int _y);
 	void ViewPortGen();
 	void TileInit();
 	void GenerateEntities();

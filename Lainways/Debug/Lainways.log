@@ -1,4 +1,6 @@
-﻿  GameEngine.cpp
-d:\it\prog4\mckeja4\lainways\lainways\gameengine.cpp(33): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+﻿  Tilemap.cpp
+d:\it\prog4\mckeja4\lainways\lainways\tilemap.cpp(54): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\it\prog4\mckeja4\lainways\lainways\tilemap.cpp(72): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+d:\it\prog4\mckeja4\lainways\lainways\tilemap.cpp(25): warning C4715: 'TileMap::GetMapEntry': not all control paths return a value
   GameEngine.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   Lainways.vcxproj -> D:\IT\Prog4\mckeja4\Lainways\Debug\Lainways.exe

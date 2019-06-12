@@ -50,7 +50,15 @@ void NPCList::deleteNPC(NPC ^ _item) {
 
 
 
-
+NPC^ NPCList::npcAt(int _x, int _y) {
+	NPC^ itemWalker = head;
+	while (itemWalker != nullptr) {
+		if (itemWalker->xPos == _x && itemWalker->yPos == _y) {
+			return itemWalker;
+		}
+		itemWalker = itemWalker->Next;
+	}
+}
 
 void NPCList::drawNPC(int _x, int _y)
 {
