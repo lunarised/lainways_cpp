@@ -246,6 +246,7 @@ namespace Lainways {
 			this->DoubleBuffered = true;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->KeyPreview = true;
 			this->Name = L"GameWindow";
 			this->Text = L"Lainways_";
 			this->Load += gcnew System::EventHandler(this, &GameWindow::GameWindow_Load);
@@ -332,7 +333,7 @@ private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e
 	canvas->DrawImage(bufferBMP, 0, 0, 800, 600);
 }
 private: System::Void GameWindow_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e) {
-
+	gCon->Keys(e);
 }
 };
 }

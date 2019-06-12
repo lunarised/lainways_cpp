@@ -27,6 +27,7 @@ public:
 	void TileInit();
 	void PlayerInit();
 	void draw();
+	void Keys(KeyEventArgs^ e);
 	property String^ seedName;
 	int NROWS = 100;
 	int NCOLS = 100;

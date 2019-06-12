@@ -86,7 +86,9 @@ void TileMap::Polnareff() {
 		bool apFail = true;
 		for (int i = 0; i < 30; i++) {
 			int radiusGen = (rand()%rad) + rad;
-			double thetaGen = (rand()/RAND_MAX) * (2 * Math::PI);
+			double fGen = ((double)rand() / RAND_MAX);
+
+			double thetaGen = fGen * (2 * Math::PI);
 			Point* trialpoint = new Point(radiusGen*cos(thetaGen) + aL[index]->X, radiusGen*sin(thetaGen) + aL[index]->Y);
 			//THE GREAT FILTERS
 			if (trialpoint->X / w < 0 || trialpoint->X / w >= nColsOF / w || trialpoint->Y / w < 0 || trialpoint->Y / w >= nRowsOF / w || wa[trialpoint->X / w, trialpoint->Y / w] != NULL) {

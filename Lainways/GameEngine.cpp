@@ -69,3 +69,38 @@ void GameEngine::seedGen(String^ inpString) {
 	 vP = gcnew Viewport(0, 0, 25, 19, tm, canvas);
 	 vP->ViewportDraw();
  }
+ void GameEngine::Keys(KeyEventArgs^ e) {
+	 if (e->KeyData == Keys::A) {
+		 if (ts->GetWalkable(tm->GetMapEntry((pC->xPos / 32) - 1, (pC->yPos / 32)))) {
+			 pC->move(2);
+		 }
+		 else {
+			 pC->rotate(2);
+		 }
+	 }
+	 if (e->KeyData == Keys::D) {
+		 if (ts->GetWalkable(tm->GetMapEntry((pC->xPos / 32) + 1, (pC->yPos / 32)))) {
+			 pC->move(1);
+		 }
+		 else {
+			 pC->rotate(1);
+		 }
+	 }
+	 if (e->KeyData == Keys::W) {
+		 if (ts->GetWalkable(tm->GetMapEntry((pC->xPos / 32), (pC->yPos / 32) - 1))) {
+			 pC->move(3);
+		 }
+		 else {
+			 pC->rotate(3);
+		 }
+	 }
+	 if (e->KeyData == Keys::S) {
+		 if (ts->GetWalkable(tm->GetMapEntry((pC->xPos / 32), (pC->yPos / 32) + 1))) {
+			 pC->move(0);
+		 }
+		 else {
+			 pC->rotate(0);
+		 }
+	 }
+
+ }
