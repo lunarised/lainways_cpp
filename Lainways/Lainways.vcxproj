@@ -135,16 +135,26 @@
   <ItemGroup>
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameWindow.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemList.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="Tilemap.cpp" />
     <ClCompile Include="TileSet.cpp" />
+    <ClCompile Include="Viewport.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameWindow.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemList.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="Tilemap.h" />
     <ClInclude Include="TileSet.h" />
+    <ClInclude Include="Viewport.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GameWindow.resx">

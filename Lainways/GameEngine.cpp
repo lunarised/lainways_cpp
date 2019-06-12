@@ -38,8 +38,8 @@ void GameEngine::seedGen(String^ inpString) {
 	seedName = (pr + " " + su);
 }
  void GameEngine::draw() {
-	 fill->Color = Color::FromArgb(rand()%256, rand()%256, rand()%256, rand()%256);
-	 canvas->FillRectangle(fill, 0, 0, 800, 600);
+	// fill->Color = Color::FromArgb(rand()%256, rand()%256, rand()%256, rand()%256);
+	// canvas->FillRectangle(fill, 0, 0, 800, 600);
 	 
 
  }

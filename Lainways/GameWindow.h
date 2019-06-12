@@ -309,12 +309,7 @@ private: System::Void startlab_Click(System::Object^  sender, System::EventArgs^
 	bufferBMP = gcnew Bitmap(800, 600);
 	bufferCanvas = Graphics::FromImage(bufferBMP);
 	canvas = gamePanel->CreateGraphics();
-
-
 	gCon = gcnew GameEngine(bufferCanvas);
-	
-
-
 	if (String::IsNullOrWhiteSpace(textBox1->Text)) {
 		gCon->genName();
 		eNameLabel->Text = gCon->seedName;
@@ -323,11 +318,8 @@ private: System::Void startlab_Click(System::Object^  sender, System::EventArgs^
 		gCon->seedName = textBox1->Text;
 		eNameLabel->Text = textBox1->Text;
 	}
-
-
 	gCon->seedGen(gCon->seedName);
 	gameLabel();
-	
 }
 private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
 	bufferCanvas->DrawImage(osI, 0, 0, 800, 600);
