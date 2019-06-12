@@ -38,8 +38,11 @@ void GameEngine::seedGen(String^ inpString) {
 	seedName = (pr + " " + su);
 }
  void GameEngine::draw() {
-	// fill->Color = Color::FromArgb(rand()%256, rand()%256, rand()%256, rand()%256);
-	// canvas->FillRectangle(fill, 0, 0, 800, 600);
+	 pC->updateFrame();
+	 pC->discover(tm, NCOLS, NROWS);
+	 vP->moveRelativeToPlayer(pC->xPos, pC->yPos);
+	 vP->ViewportDraw();
+	 pC->forceDraw(400, 304);
 	 
 
  }
@@ -54,4 +57,15 @@ void GameEngine::seedGen(String^ inpString) {
  }
  void GameEngine::MapGen() {
 	 tm = gcnew TileMap(ts, canvas, NROWS, NCOLS);
+	 tm->GenerateMap(NROWS, NCOLS);
+ }
+ void GameEngine::PlayerInit() {
+	 Bitmap^ pCI = gcnew Bitmap("Player.bmp");
+	 Color tC = pCI->GetPixel(0, 0);
+	 pCI->MakeTransparent(tC);
+	 pC = gcnew Player(canvas, pCI, 3);
+ }
+ void GameEngine::ViewPortGen() {
+	 vP = gcnew Viewport(0, 0, 25, 19, tm, canvas);
+	 vP->ViewportDraw();
  }

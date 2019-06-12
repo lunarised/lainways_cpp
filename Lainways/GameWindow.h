@@ -249,6 +249,7 @@ namespace Lainways {
 			this->Name = L"GameWindow";
 			this->Text = L"Lainways_";
 			this->Load += gcnew System::EventHandler(this, &GameWindow::GameWindow_Load);
+			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &GameWindow::GameWindow_KeyDown);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -305,7 +306,7 @@ private: System::Void menuLabel() {
 	timer1->Enabled = false;
 }
 private: System::Void startlab_Click(System::Object^  sender, System::EventArgs^  e) {
-	osI = Image::FromFile("bgI.png");
+	osI = Image::FromFile("black.png");
 	bufferBMP = gcnew Bitmap(800, 600);
 	bufferCanvas = Graphics::FromImage(bufferBMP);
 	canvas = gamePanel->CreateGraphics();
@@ -321,13 +322,17 @@ private: System::Void startlab_Click(System::Object^  sender, System::EventArgs^
 	gCon->seedGen(gCon->seedName);
 	gameLabel();
 	gCon->TileInit();
+	gCon->PlayerInit();
 	gCon->MapGen();
+	gCon->ViewPortGen();
 }
 private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
 	bufferCanvas->DrawImage(osI, 0, 0, 800, 600);
 	gCon->draw();
-
 	canvas->DrawImage(bufferBMP, 0, 0, 800, 600);
+}
+private: System::Void GameWindow_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e) {
+
 }
 };
 }
