@@ -137,6 +137,8 @@
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemList.cpp" />
+    <ClCompile Include="NPC.cpp" />
+    <ClCompile Include="NPCList.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Tilemap.cpp" />
@@ -150,6 +152,8 @@
     </ClInclude>
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemList.h" />
+    <ClInclude Include="NPC.h" />
+    <ClInclude Include="NPCList.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Tilemap.h" />

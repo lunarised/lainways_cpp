@@ -51,6 +51,7 @@ void GameEngine::seedGen(String^ inpString) {
 	 vP->moveRelativeToPlayer(pC->xPos, pC->yPos);
 	 vP->ViewportDraw();
 	 iL->drawItems(vP->ViewportWorldX, vP->ViewportWorldY);
+	 nL->drawNPC(vP->ViewportWorldX, vP->ViewportWorldY);
 	 pC->forceDraw(400, 304);
 	 
 
@@ -69,6 +70,7 @@ void GameEngine::seedGen(String^ inpString) {
  void GameEngine::MapGen() {
 	 tm = gcnew TileMap(ts, canvas, NROWS, NCOLS);
 	 iL = gcnew ItemList(tm);
+	 nL = gcnew NPCList(tm);
 	 tm->GenerateMap(NROWS, NCOLS);
 	 
  }
@@ -86,17 +88,25 @@ void GameEngine::seedGen(String^ inpString) {
 	 Bitmap^ coin = gcnew Bitmap("USBStick.bmp");
 	 Color tC = coin->GetPixel(0, 0);
 	 coin->MakeTransparent(tC);
+	 Bitmap^ camera = gcnew Bitmap("Camera.bmp");
+	 tC = camera->GetPixel(0, 0);
+	 camera->MakeTransparent(tC);
+
 	 for (int i = 1; i < NCOLS - 1; i++) {
 		 for (int j = 1; j < NROWS - 1; j++) {
 			 if (abs(tm->GetMapEntry(i, j)) == 2) {
 				 if (rand() % 40 == 0) {
 					 iL->addItem(gcnew Item(canvas, coin, 16, 16, 1, i * 32, j * 32, 1));
 				 }
+				 else if (rand() % 200 == 0) {
+					 nL->addNPC(gcnew NPC(canvas, camera, 32, 32, 1, i * 32, j * 32, 1));
+				 }
 			 }
 		 }
 	 }
 
  }
+ void GameEngine::PlayerHit(){}
  void GameEngine::PlayerMove() {
 	 if (moveFrame != 15) {
 		 if (moveFrame == 0 || moveFrame == 14) {
@@ -124,7 +134,10 @@ void GameEngine::seedGen(String^ inpString) {
 			 
 			 if (e->KeyData == Keys::Left) {
 				 //if you can move to the left sided tile
-				 if (ts->GetWalkable(tm->GetMapEntry((pC->xPos / 32) - 1, (pC->yPos / 32)))) {
+				 if (nL->Collide(pC->xPos - 32, pC->yPos)) {
+					 PlayerHit();
+				 }
+				 else if (ts->GetWalkable(tm->GetMapEntry((pC->xPos / 32) - 1, (pC->yPos / 32)))) {
 					 // pC->move(2);
 					 moveFrame = 0;
 					 moveDirection = 2;
@@ -135,9 +148,13 @@ void GameEngine::seedGen(String^ inpString) {
 					 pC->rotate(2);
 				 }
 			 }
-			 if (e->KeyData == Keys::Right) {
+			 
+			  if (e->KeyData == Keys::Right) {
 				 //if you can move to the right sided tile
-				 if (ts->GetWalkable(tm->GetMapEntry((pC->xPos / 32) + 1, (pC->yPos / 32)))) {
+				  if (nL->Collide(pC->xPos + 32, pC->yPos)) {
+					  PlayerHit();
+				  }
+			  else if (ts->GetWalkable(tm->GetMapEntry((pC->xPos / 32) + 1, (pC->yPos / 32)))) {
 					 // pC->move(1);
 					 moveFrame = 0;
 					 moveDirection = 1;
@@ -149,9 +166,13 @@ void GameEngine::seedGen(String^ inpString) {
 
 				 }
 			 }
-			 if (e->KeyData == Keys::Up) {
+			 
+			  if (e->KeyData == Keys::Up) {
+				  if (nL->Collide(pC->xPos, pC->yPos - 32)) {
+					  PlayerHit();
+				  }
 				 //If you can move to the up sided tile
-				 if (ts->GetWalkable(tm->GetMapEntry((pC->xPos / 32), (pC->yPos / 32) - 1))) {
+				  else if (ts->GetWalkable(tm->GetMapEntry((pC->xPos / 32), (pC->yPos / 32) - 1))) {
 					 // pC->move(3);
 					 moveFrame = 0;
 					 moveDirection = 3;
@@ -164,7 +185,10 @@ void GameEngine::seedGen(String^ inpString) {
 			 }
 			 if (e->KeyData == Keys::Down) {
 				 //If you can move to the down sided tile
-				 if (ts->GetWalkable(tm->GetMapEntry((pC->xPos / 32), (pC->yPos / 32) + 1))) {
+				 if (nL->Collide(pC->xPos , pC->yPos +32)) {
+					 PlayerHit();
+				 }
+				 else if (ts->GetWalkable(tm->GetMapEntry((pC->xPos / 32), (pC->yPos / 32) + 1))) {
 					 // pC->move(0);
 					 moveFrame = 0;
 					 moveDirection = 0;

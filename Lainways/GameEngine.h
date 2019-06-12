@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Viewport.h"
 #include "ItemList.h"
+#include "NPCList.h"
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
@@ -20,6 +21,7 @@ private:
 	SolidBrush^ fill;
 	TileMap^ tm;
 	ItemList^ iL;
+	NPCList^ nL;
 	int moveFrame;
 	int moveDirection;
 	
@@ -30,6 +32,7 @@ public:
 	property int score;
 	void Lose();
 	void MapGen();
+	void PlayerHit();
 	void ViewPortGen();
 	void TileInit();
 	void GenerateEntities();
