@@ -37,9 +37,9 @@ void Viewport::moveRelativeToPlayer(int playerWorldX, int playerWorldY)
 void Viewport::ViewportDraw()
 {
 	int startX = ViewportWorldX / map->GetMapCellBitmap(0, 0)->Width;
-	int startY = ViewportWorldY / map->GetMapCellBitmap(0, 0)->Height;
-	int xOffset = ViewportWorldX % map->GetMapCellBitmap(0, 0)->Width;
-	int yOffset = ViewportWorldY % map->GetMapCellBitmap(0, 0)->Height;
+	 int startY = ViewportWorldY / map->GetMapCellBitmap(0, 0)->Height;
+	 int xOffset = ViewportWorldX % map->GetMapCellBitmap(0, 0)->Width;
+	 int yOffset = ViewportWorldY % map->GetMapCellBitmap(0, 0)->Height;
 	int locX = 0;
 	int locY = 0;
 	for (int c = startX; c <= startX + viewportTilesWide; c++)
@@ -51,7 +51,7 @@ void Viewport::ViewportDraw()
 			}
 			locY += map->GetMapCellBitmap(0, 0)->Width;
 		}
-		locX += map->GetMapCellBitmap(0, 0)->Height;
+		locX += map->GetMapCellBitmap(0,0)->Height;
 		locY = 0;
 	}
 }

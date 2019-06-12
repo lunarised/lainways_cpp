@@ -61,6 +61,7 @@ int ItemList::Pickup(int _x, int _y)
 		}
 		itemWalker = itemWalker->Next;
 	}
+	return 0;
 }
 
 

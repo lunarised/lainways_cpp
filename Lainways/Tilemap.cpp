@@ -54,12 +54,10 @@ void TileMap::LoadMapFromFile(String^ _fName) {
 Bitmap^ TileMap::GetMapCellBitmap(int _worldCol, int _worldRow) {
 	int mapVal = map[_worldCol, _worldRow];
 	if (mapVal <= 0) {
-		Bitmap^ blank = gcnew Bitmap(32, 32);
-		return blank;
+		return tileSet->GetTileBitmap(0);
 	}
-	Bitmap^ tileImage = tileSet->GetTileBitmap(mapVal);
-	return tileImage;
-
+	return tileSet->GetTileBitmap(mapVal);
+	
 }
 
 void TileMap::Polnareff() {
@@ -116,7 +114,6 @@ void TileMap::Polnareff() {
 				apFail = false;
 				break;
 			}
-
 		}
 		if (apFail) {
 			aL.erase(aL.begin() + index);
@@ -246,9 +243,7 @@ void TileMap::GenerateFeats() {
 	for (int i = 1; i < nCols - 1; i++) {
 		for (int j = 1; j < nRows - 1; j++) {
 			if (abs(GetMapEntry(i, j)) == 2) {
-				if (rand()%(50) == 0) {
-				//	TileForm::instance->putCoin(i * 32, j * 32);
-				}
+				
 				if (GetMapEntry(i - 1, j) == 0) {
 					SetMapEntry(i - 1, j, -1);
 				}
@@ -280,9 +275,7 @@ void TileMap::GenerateFeats() {
 		for (int j = 1; j < nRows - 1; j++) {
 			bool nullneighbor = false;
 			if (abs(GetMapEntry(i, j)) == 1) {
-				//if (r->Next(50) == 0) {
-				//TileForm::instance->putCoin(i * 32, j * 32);
-				//}
+				
 				if (GetMapEntry(i - 1, j) == 0) {
 					nullneighbor = true;
 				}

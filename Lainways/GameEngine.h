@@ -3,6 +3,7 @@
 #include "TileSet.h"
 #include "Player.h"
 #include "Viewport.h"
+#include "ItemList.h"
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
@@ -18,19 +19,28 @@ private:
 	Graphics^ canvas;
 	SolidBrush^ fill;
 	TileMap^ tm;
+	ItemList^ iL;
+	int moveFrame;
+	int moveDirection;
+	
 public:
 	GameEngine(Graphics^ _canvas);
 	void seedGen(String^ inpString);
 	void genName();
+	property int score;
+	void Lose();
 	void MapGen();
 	void ViewPortGen();
 	void TileInit();
+	void GenerateEntities();
+	void PlayerMove();
 	void PlayerInit();
 	void draw();
 	void Keys(KeyEventArgs^ e);
 	property String^ seedName;
 	int NROWS = 100;
 	int NCOLS = 100;
+	property int state;
 };
 
 

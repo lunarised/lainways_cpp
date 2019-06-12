@@ -1,6 +1,6 @@
+#pragma once
 #include "ItemList.h"
 #include "TileMap.h"
-#pragma once
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
@@ -13,9 +13,9 @@ public:
 	Player(Graphics^ _canvas, Bitmap^ _spriteSheet, int _nFrames);
 	void draw();
 	void forceDraw(int _x, int _y);
-	void move(int _direction);
+	void move(int _direction, int px);
 	void updateFrame();
-	void Pickup(ItemList^ _iL);
+	int Pickup(ItemList^ _iL);
 	void setSpriteSheet(Bitmap^ _spriteSheet, int _nFrames);
 	void boundsCheck();
 	void discover(TileMap^ tm, int nCols, int nRows);

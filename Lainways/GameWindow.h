@@ -52,6 +52,7 @@ namespace Lainways {
 	SolidBrush^ fill;
 	GameEngine^ gCon;
 	Image^ osI;
+	
 	private: System::Windows::Forms::Timer^  timer1;
 	private: System::ComponentModel::IContainer^  components;
 	protected:
@@ -222,7 +223,7 @@ namespace Lainways {
 			// 
 			// timer1
 			// 
-			this->timer1->Interval = 16;
+			this->timer1->Interval = 10;
 			this->timer1->Tick += gcnew System::EventHandler(this, &GameWindow::timer1_Tick);
 			// 
 			// GameWindow
@@ -269,7 +270,14 @@ private: System::Void diffOnClick() {
 		 }
 
 private: System::Void GameWindow_Load(System::Object^  sender, System::EventArgs^  e) {
+	
+	
 	timer1->Enabled = false;
+	osI = Image::FromFile("black.png");
+	bufferBMP = gcnew Bitmap(800, 600);
+	bufferCanvas = Graphics::FromImage(bufferBMP);
+	canvas = gamePanel->CreateGraphics();
+	gCon = gcnew GameEngine(bufferCanvas);
 	menuLabel();
 
 }
@@ -291,6 +299,8 @@ private: System::Void gameLabel() {
 	startlab->Visible = false;
 	gamePanel->Visible = true;
 	timer1->Enabled = true;
+	textBox1->Enabled = false;
+	textBox1->Select(0,-1);
 }
 private: System::Void menuLabel() {
 	scorelab->Visible = false;
@@ -307,11 +317,8 @@ private: System::Void menuLabel() {
 	timer1->Enabled = false;
 }
 private: System::Void startlab_Click(System::Object^  sender, System::EventArgs^  e) {
-	osI = Image::FromFile("black.png");
-	bufferBMP = gcnew Bitmap(800, 600);
-	bufferCanvas = Graphics::FromImage(bufferBMP);
-	canvas = gamePanel->CreateGraphics();
-	gCon = gcnew GameEngine(bufferCanvas);
+	
+	gCon->state = 1;
 	if (String::IsNullOrWhiteSpace(textBox1->Text)) {
 		gCon->genName();
 		eNameLabel->Text = gCon->seedName;
@@ -326,14 +333,19 @@ private: System::Void startlab_Click(System::Object^  sender, System::EventArgs^
 	gCon->PlayerInit();
 	gCon->MapGen();
 	gCon->ViewPortGen();
+	gCon->GenerateEntities();
 }
 private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
 	bufferCanvas->DrawImage(osI, 0, 0, 800, 600);
+	gCon->PlayerMove();
 	gCon->draw();
+	scorelab->Text = gCon->score.ToString();
 	canvas->DrawImage(bufferBMP, 0, 0, 800, 600);
 }
 private: System::Void GameWindow_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e) {
 	gCon->Keys(e);
+
+	
 }
 };
 }

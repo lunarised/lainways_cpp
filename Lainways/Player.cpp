@@ -18,29 +18,29 @@ void Player::draw() {
 	Rectangle pixelsToDraw = Rectangle(currentFrame*frameWidth, 0, frameWidth, frameHeight);
 	canvas->DrawImage(spriteSheet, xPos, yPos, pixelsToDraw, GraphicsUnit::Pixel);
 }
-void Player::Pickup(ItemList^ _IL) {
-	_IL->Pickup(xPos, yPos);
+int Player::Pickup(ItemList^ _IL) {
+	return _IL->Pickup(xPos, yPos);
 }
 
 void Player::forceDraw(int _x, int _y) {
 	Rectangle pixelsToDraw = Rectangle(currentFrame*frameWidth, frameHeight*direction, frameWidth, frameHeight);
 	canvas->DrawImage(spriteSheet, _x, _y, pixelsToDraw, GraphicsUnit::Pixel);
 }
-void Player::move(int _direction) {
+void Player::move(int _direction, int dis) {
 	direction = _direction;
 	switch (_direction) {
 	case 0:
 
-		yPos += SPEED;
+		yPos += dis;
 		break;
 	case 1:
-		xPos += SPEED;
+		xPos += dis;
 		break;
 	case 2:
-		xPos -= SPEED;
+		xPos -= dis;
 		break;
 	case 3:
-		yPos -= SPEED;
+		yPos -= dis;
 		break;
 	}
 
