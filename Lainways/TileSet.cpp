@@ -15,6 +15,14 @@ TileSet::TileSet(int _nTiles)
 Bitmap^ TileSet::GetTileBitmap(int _tileIndex) {
 	return tileArray[_tileIndex]->tileBitmap;
 }
+bool TileSet::GetWalkable(int _tileIndex) {
+	if (_tileIndex < nTiles) {
+		return tileArray[Math::Abs(_tileIndex)]->walkable;
+	}
+	else {
+		return false;
+	}
+}
 
 void TileSet::SetTileArrayEntry(int _arrayN, Tile^ _tileToInsert) {
 	tileArray[_arrayN] = _tileToInsert;

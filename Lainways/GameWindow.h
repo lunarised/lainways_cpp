@@ -320,6 +320,8 @@ private: System::Void startlab_Click(System::Object^  sender, System::EventArgs^
 	}
 	gCon->seedGen(gCon->seedName);
 	gameLabel();
+	gCon->TileInit();
+	gCon->MapGen();
 }
 private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
 	bufferCanvas->DrawImage(osI, 0, 0, 800, 600);

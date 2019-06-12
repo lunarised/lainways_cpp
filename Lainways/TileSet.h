@@ -8,6 +8,7 @@ private:
 public:
 	TileSet(int _nTiles);
 	Bitmap^ GetTileBitmap(int _tileIndex);
+	bool GetWalkable(int _tileIndex);
 	void SetTileArrayEntry(int _arrayN, Tile^ _tileToInsert);
 };
 

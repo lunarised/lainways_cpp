@@ -1,4 +1,6 @@
 #pragma once
+#include "Tilemap.h"
+#include "TileSet.h"
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
@@ -8,17 +10,21 @@ using namespace System::Drawing;
 ref class GameEngine
 {
 private:
-	Color^ c;
 
-	
+	TileSet^ ts;
 	Graphics^ canvas;
 	SolidBrush^ fill;
+	TileMap^ tm;
 public:
 	GameEngine(Graphics^ _canvas);
 	void seedGen(String^ inpString);
 	void genName();
+	void MapGen();
+	void TileInit();
 	void draw();
 	property String^ seedName;
+	int NROWS = 100;
+	int NCOLS = 100;
 };
 
 

@@ -4,12 +4,11 @@
 //using namespace::Lainways;
 typedef std::pair <int, int> point;
 
-TileMap::TileMap(TileSet^ _tileSet, Graphics^ _startCanvas, int _startNCols, int _startNRows, Random^ _r) {
+TileMap::TileMap(TileSet^ _tileSet, Graphics^ _startCanvas, int _startNCols, int _startNRows) {
 	canvas = _startCanvas;
 	nCols = _startNCols;
 	nRows = _startNRows;
 	tileSet = _tileSet;
-	r = _r;
 	map = gcnew array<int, 2>(nCols, nRows);
 	roomXarr = gcnew array<int>(NROOMS);
 	roomYarr = gcnew array<int>(NROOMS);
@@ -71,23 +70,23 @@ void TileMap::Polnareff() {
 	int w = rad / (sqrt(2));
 	std::vector<Point*> aL;
 	array<Point*, 2> ^ wa = gcnew array <Point*, 2>(nColsOF / w, nRowsOF / w);
-	int seedX = r->Next(nColsOF - 2) + 2;
-	int seedY = r->Next(nRowsOF - 2) + 2;
+	int seedX = (rand()%nColsOF - 2) + 2;
+	int seedY = (rand()%nRowsOF - 2) + 2;
 	while (seedX / w >= nColsOF / w || seedY / w >= nRowsOF / w) {
 
-		seedX = r->Next(nColsOF - 2) + 2;
-		seedY = r->Next(nRowsOF - 2) + 2;
+		seedX = (rand()%nColsOF - 2) + 2;
+		seedY = (rand()%nRowsOF - 2) + 2;
 	}
 	aL.push_back(new Point(seedX, seedY));
 	wa[aL[0]->X / w, aL[0]->Y / w] = aL[0];
 
 	while (!aL.empty()) {
 		int cuck = aL.size();
-		int index = r->Next(aL.size());
+		int index = rand()%aL.size();
 		bool apFail = true;
 		for (int i = 0; i < 30; i++) {
-			int radiusGen = r->Next(rad) + rad;
-			double thetaGen = r->NextDouble() * (2 * Math::PI);
+			int radiusGen = (rand()%rad) + rad;
+			double thetaGen = (rand()/RAND_MAX) * (2 * Math::PI);
 			Point* trialpoint = new Point(radiusGen*cos(thetaGen) + aL[index]->X, radiusGen*sin(thetaGen) + aL[index]->Y);
 			//THE GREAT FILTERS
 			if (trialpoint->X / w < 0 || trialpoint->X / w >= nColsOF / w || trialpoint->Y / w < 0 || trialpoint->Y / w >= nRowsOF / w || wa[trialpoint->X / w, trialpoint->Y / w] != NULL) {
@@ -133,13 +132,13 @@ void TileMap::Polnareff() {
 				}
 				int roomX = wa[i, j]->X;
 				int roomY = wa[i, j]->Y;
-				int roomSizeX = r->Next(nCols / 10);
+				int roomSizeX = rand()%(nCols / 10);
 				while (roomSizeX + roomX > nCols - 2) {
-					roomSizeX = r->Next(nCols / 10);
+					roomSizeX = rand()%(nCols / 10);
 				}
-				int roomSizeY = r->Next(nRows / 10);
+				int roomSizeY = rand()%(nRows / 10);
 				while (roomSizeY + roomY > nRows - 2) {
-					roomSizeY = r->Next(nRows / 10);
+					roomSizeY = rand()%(nRows / 10);
 				}
 				GenerateRoom(roomX, roomY, roomSizeX, roomSizeY);
 				roomXarr[nRooms] = roomX + (roomSizeX / 2);
@@ -151,7 +150,7 @@ void TileMap::Polnareff() {
 	}
 }
 
-void TileMap::GenerateMap(int _ncols, int _nrows, Random^ r) {
+void TileMap::GenerateMap(int _ncols, int _nrows) {
 	//SET DIMENSIONS
 	int NCOLS = _ncols;
 	int NROWS = _nrows;
@@ -245,7 +244,7 @@ void TileMap::GenerateFeats() {
 	for (int i = 1; i < nCols - 1; i++) {
 		for (int j = 1; j < nRows - 1; j++) {
 			if (abs(GetMapEntry(i, j)) == 2) {
-				if (r->Next(50) == 0) {
+				if (rand()%(50) == 0) {
 				//	TileForm::instance->putCoin(i * 32, j * 32);
 				}
 				if (GetMapEntry(i - 1, j) == 0) {

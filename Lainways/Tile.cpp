@@ -2,7 +2,8 @@
 
 
 
-Tile::Tile(Bitmap^ _tileBitmap)
+Tile::Tile(Bitmap^ _tileBitmap, bool _walkable)
 {
+	walkable = _walkable;
 	tileBitmap = _tileBitmap;
 }

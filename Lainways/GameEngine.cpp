@@ -43,3 +43,15 @@ void GameEngine::seedGen(String^ inpString) {
 	 
 
  }
+ void GameEngine::TileInit() {
+	 Tile^ cobble = gcnew Tile(gcnew Bitmap("cobble.bmp"), true);
+	 Tile^ flower = gcnew Tile(gcnew Bitmap("flower.bmp"), false);
+	 Tile^ grass = gcnew Tile(gcnew Bitmap("grass.bmp"), true);
+	 ts = gcnew TileSet(4);
+	 ts->SetTileArrayEntry(0, cobble);
+	 ts->SetTileArrayEntry(1, flower);
+	 ts->SetTileArrayEntry(2, grass);
+ }
+ void GameEngine::MapGen() {
+	 tm = gcnew TileMap(ts, canvas, NROWS, NCOLS);
+ }

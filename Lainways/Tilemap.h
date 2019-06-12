@@ -1,6 +1,6 @@
 #pragma once
 #include "TileSet.h"
-#include "GameEngine.h"
+
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
@@ -15,20 +15,19 @@ private:
 	Graphics^ canvas;
 	array<int>^ roomXarr;
 	array<int>^ roomYarr;
-	Random^ r;
 public:
-	TileMap(TileSet^ _tileSet, Graphics^ _startCanvas, int _startNRows, int _startNCols, Random^ r);
+	TileMap(TileSet^ _tileSet, Graphics^ _startCanvas, int _startNRows, int _startNCols);
 	void SetMapEntry(int _col, int _row, int _tileIndex);
 	void LoadMapFromFile(String^ filename);
-	void GenerateMap(int _ncols, int _nrows, Random^ r);
+	void GenerateMap(int _ncols, int _nrows);
 	void GenerateRoom(int _x, int _y, int _width, int _height);
 	int GetMapEntry(int _col, int _row);
 	void GenerateCorridor(int _x1, int _x2, int _y1, int _y2);
 	void GenerateFeats();
 	void DrawMap();
 	Bitmap^ GetMapCellBitmap(int _worldRow, int _worldCol);
-	property int nCols;
-	property int nRows;
+	int nCols;
+ int nRows;
 	const int NROOMS = 225;
 	void Polnareff();
 };
