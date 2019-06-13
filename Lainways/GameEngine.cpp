@@ -66,13 +66,13 @@ void GameEngine::seedGen(String^ inpString) {
  } 
  /*Adds all tiles to the tileset*/
  void GameEngine::TileInit() {
-	 Tile^ cobble = gcnew Tile(gcnew Bitmap("cobble.bmp"), true);
+	 Tile^ portal = gcnew Tile(gcnew Bitmap("floor1.bmp"), true);
 	 Tile^ flower = gcnew Tile(gcnew Bitmap("wall.bmp"), false);
 	 Tile^ grass = gcnew Tile(gcnew Bitmap("floor0.bmp"), true);
 	 Tile^ blank = gcnew Tile(gcnew Bitmap(32, 32), false);
 	 ts = gcnew TileSet(4);
 	 ts->SetTileArrayEntry(0, blank);
-	 ts->SetTileArrayEntry(3, cobble);
+	 ts->SetTileArrayEntry(3, portal);
 	 ts->SetTileArrayEntry(1, flower);
 	 ts->SetTileArrayEntry(2, grass);
  }
@@ -91,6 +91,42 @@ void GameEngine::seedGen(String^ inpString) {
 	 pCI->MakeTransparent(tC);
 	 pC = gcnew Player(canvas, pCI, 3);
  }
+ /*Descends the player into another level*/
+ void GameEngine::Descend() {
+	 score += 120;
+	 
+	 //for (int i = 0; i < NROWS; i++) {
+	//	 for (int j = 0; j < NCOLS; j++) {
+	//		 tm->SetMapEntry(i, j, 0);
+	//	 }
+	 //}
+	 TileMap^ tm2 = gcnew TileMap(ts, canvas, NROWS, NCOLS);
+	 tm = tm2;
+	 ItemList^ iL2 = gcnew ItemList(tm2);
+	 iL = iL2;
+	 NPCList^ nL2 = gcnew NPCList(tm2);
+	 nL = nL2;
+	 ProjectileList^ pL2 = gcnew ProjectileList(tm2);
+	 pL = pL2;
+
+	 Bitmap^ pCI = gcnew Bitmap("Player.bmp");
+	 Color tC = pCI->GetPixel(0, 0);
+	 pCI->MakeTransparent(tC);
+	 Player^ pC2 = gcnew Player(canvas, pCI, 3);
+	 pC = pC2;
+	 Viewport^ vp2  = gcnew Viewport(0, 0, 25, 19, tm2, canvas);
+	 
+	 vP = vp2;
+	 
+	
+	 
+	 
+	 
+	 vP->ViewportDraw();
+	 tm->GenerateMap(NROWS, NCOLS);
+	 GenerateEntities();
+	 }
+ 
  /*Handles Init of the Viewport*/
  void GameEngine::ViewPortGen() {
 	 vP = gcnew Viewport(0, 0, 25, 19, tm, canvas);
@@ -104,6 +140,14 @@ void GameEngine::seedGen(String^ inpString) {
 	 Bitmap^ camera = gcnew Bitmap("Camera.bmp");
 	 tC = camera->GetPixel(0, 0);
 	 camera->MakeTransparent(tC);
+	 int pX, pY = 0;
+	 while (abs(tm->GetMapEntry(pX, pY)) != 2) {
+		 pX = rand() % NCOLS - 1;
+		 pY = rand() % NROWS - 1;
+	 }
+	 tm->SetMapEntry(pX, pY , -3);
+
+
 	 for (int i = 1; i < NCOLS - 1; i++) {
 		 for (int j = 1; j < NROWS - 1; j++) {
 			 if (abs(tm->GetMapEntry(i, j)) == 2) {
@@ -167,6 +211,10 @@ void GameEngine::seedGen(String^ inpString) {
 					 PlayerHit(pC->xPos - 32, pC->yPos);
 				 }
 				 else if (ts->GetWalkable(tm->GetMapEntry((pC->xPos / 32) - 1, (pC->yPos / 32)))) {
+					 if (tm->GetMapEntry((pC->xPos / 32) - 1, (pC->yPos / 32)) == 3) {
+						 Descend();
+						 return;
+					 }
 					 moveFrame = 0;
 					 moveDirection = 2;
 					 score--;
@@ -182,7 +230,11 @@ void GameEngine::seedGen(String^ inpString) {
 					  PlayerHit(pC->xPos + 32, pC->yPos);
 				  }
 			  else if (ts->GetWalkable(tm->GetMapEntry((pC->xPos / 32) + 1, (pC->yPos / 32)))) { //if walkable
-					 moveFrame = 0;
+					  if (tm->GetMapEntry((pC->xPos / 32) + 1, (pC->yPos / 32)) == 3) {
+						  Descend();
+						  return;
+					  }
+					  moveFrame = 0;
 					 moveDirection = 1;
 					 score--;
 				 }
@@ -197,7 +249,11 @@ void GameEngine::seedGen(String^ inpString) {
 				  }
 				 
 				  else if (ts->GetWalkable(tm->GetMapEntry((pC->xPos / 32), (pC->yPos / 32) - 1))) {//if walkable
-					 moveFrame = 0;
+					  if (tm->GetMapEntry((pC->xPos / 32) , (pC->yPos / 32) -1) == 3) {
+						  Descend();
+						  return;
+					  }
+					  moveFrame = 0;
 					 moveDirection = 3;
 					 score--;
 				 }
@@ -212,6 +268,10 @@ void GameEngine::seedGen(String^ inpString) {
 					 pC->rotate(0);
 				 }
 				 else if (ts->GetWalkable(tm->GetMapEntry((pC->xPos / 32), (pC->yPos / 32) + 1))) {//if tiles walkable
+					 if (tm->GetMapEntry((pC->xPos / 32) , (pC->yPos / 32)+1) == 3) {
+						 Descend();
+						 return;
+					 }
 					 moveFrame = 0;
 					 moveDirection = 0;
 					 score--;

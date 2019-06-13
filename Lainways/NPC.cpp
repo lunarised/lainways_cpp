@@ -10,14 +10,12 @@ NPC::NPC(Graphics^ _canvas, Bitmap^ _spriteSheet, int _frameWidth, int _frameHei
 	tm = _tm;
 	nFrames = _nFrames;
 	spriteSheet = _spriteSheet;
-
 	xPos = _xPos;
 	yPos = _yPos;
 	Type = _Type;
 	state = 0;
 	direction = rand() % 4;
 	if (_Type == 1) {
-		
 		health = rand() % 10 + 1;
 	}
 }
@@ -31,12 +29,11 @@ void NPC::genState(int _x, int _y) {
 		}
 	}
 	else {
-		state = 0;//Idle
-		
+		state = 0;//Idle	
 	}
 }
 int NPC::action(int _x, int _y) {
-	if (state == 0 || state == 2) {
+	if (state == 0) {
 		health += (health < 6) ? rand() % 3 : 0;
 	}
 	if (state == 1) {
@@ -88,8 +85,6 @@ int NPC::action(int _x, int _y) {
 			if (_x  == xPos - 32 && _y == yPos ) {
 				return rand() % 4;
 			}
-			
-
 			else {
 				xPos -= 32;
 			}
@@ -132,42 +127,19 @@ int NPC::action(int _x, int _y) {
 		else {
 			direction = yDir;
 		}
-		if (Math::Abs(tm->GetMapEntry((xPos / 32), (yPos / 32) + 1)) >= 2 && direction == 0) {
-			if (_x == xPos && _y == yPos + 32) {
-				return rand() % 4;
-			}
-			else {
-				yPos -= 32;
-			}
+		if (Math::Abs(tm->GetMapEntry((xPos / 32), (yPos / 32) - 1)) >= 2 && direction == 0) {
+			yPos -= 32;
 		}
-		else if (Math::Abs(tm->GetMapEntry((xPos / 32) + 1, (yPos / 32))) >= 2 && direction == 1) {
-			if (_x == xPos + 32 && _y == yPos) {
-				return rand() % 4;
-			}
-			else {
+		else if (Math::Abs(tm->GetMapEntry((xPos / 32) - 1, (yPos / 32))) >= 2 && direction == 1) {
 				xPos -= 32;
-			}
 		}
-		else if (Math::Abs(tm->GetMapEntry((xPos / 32) - 1, (yPos / 32))) >= 2 && direction == 2) {
-			if (_x == xPos - 32 && _y == yPos) {
-				return rand() % 4;
-			}
-
-
-			else {
+		else if (Math::Abs(tm->GetMapEntry((xPos / 32) + 1, (yPos / 32))) >= 2 && direction == 2) {	
 				xPos += 32;
-			}
 		}
-		else if (Math::Abs(tm->GetMapEntry((xPos / 32), (yPos / 32) - 1)) >= 2 && direction == 3) {
-			if (_x == xPos && _y == yPos - 32) {
-				return rand() % 4;
-			}
-			else {
+		else if (Math::Abs(tm->GetMapEntry((xPos / 32), (yPos / 32) + 1)) >= 2 && direction == 3) {
 				yPos += 32;
-			}
 		}
 	}
-
 }
 void NPC::draw(int _xVP, int _yVP) {
 	if (xPos > _xVP - frameWidth && yPos > _yVP - frameHeight && xPos < _xVP + 800 && yPos < _yVP + 600) {

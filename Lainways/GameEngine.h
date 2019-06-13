@@ -34,6 +34,7 @@ public:
 	void genName();
 	property int score;
 	void Lose();
+	void Descend();
 	void MapGen();
 	void PlayerHit(int _x, int _y);
 	void ViewPortGen();

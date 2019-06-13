@@ -1,4 +1,4 @@
 ﻿  NPC.cpp
-d:\it\prog4\mckeja4\lainways\lainways\npc.cpp(171): warning C4715: 'NPC::action': not all control paths return a value
+d:\it\prog4\mckeja4\lainways\lainways\npc.cpp(161): warning C4715: 'NPC::action': not all control paths return a value
   GameEngine.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   Lainways.vcxproj -> D:\IT\Prog4\mckeja4\Lainways\Debug\Lainways.exe
