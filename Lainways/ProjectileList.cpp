@@ -1,13 +1,13 @@
-#include "NPCList.h"
+#include "ProjectileList.h"
 
-NPCList::NPCList(TileMap^ _tm)
+ProjectileList::ProjectileList(TileMap^ _tm)
 {
 	tm = _tm;
 	head = nullptr;
 	tail = nullptr;
 }
 
-void NPCList::addNPC(NPC^ _item)
+void ProjectileList::addProj(Projectile^ _item)
 {
 	if (tail == nullptr) {
 		head = _item;
@@ -21,8 +21,8 @@ void NPCList::addNPC(NPC^ _item)
 	}
 }
 
-void NPCList::deleteNPC(NPC ^ _item) {
-	NPC^ itemWalker;
+void ProjectileList::deleteProj(Projectile ^ _item) {
+	Projectile^ itemWalker;
 	itemWalker = head;
 	if (head == _item) {
 		if (tail == _item) {
@@ -50,8 +50,8 @@ void NPCList::deleteNPC(NPC ^ _item) {
 
 
 
-NPC^ NPCList::npcAt(int _x, int _y) {
-	NPC^ itemWalker = head;
+Projectile^ ProjectileList::projAt(int _x, int _y) {
+	Projectile^ itemWalker = head;
 	while (itemWalker != nullptr) {
 		if (itemWalker->xPos == _x && itemWalker->yPos == _y) {
 			return itemWalker;
@@ -60,9 +60,9 @@ NPC^ NPCList::npcAt(int _x, int _y) {
 	}
 }
 
-void NPCList::drawNPC(int _x, int _y)
+void ProjectileList::drawProj(int _x, int _y)
 {
-	NPC^ itemWalker = head;
+	Projectile^ itemWalker = head;
 	while (itemWalker != nullptr) {
 		if (tm->GetMapEntry(itemWalker->xPos / 32, itemWalker->yPos / 32) > 0) {
 			itemWalker->draw(_x, _y);
@@ -70,10 +70,31 @@ void NPCList::drawNPC(int _x, int _y)
 		itemWalker = itemWalker->Next;
 	}
 }
+void ProjectileList::moveProj() {
+	Projectile^ itemWalker = head;
+	while (itemWalker != nullptr) {
+		if (Math::Abs(tm->GetMapEntry((itemWalker->xPos / 32), (itemWalker->yPos / 32) +1 ) ) >= 2 && itemWalker->dir == 0) {
+			itemWalker->move();
+		}
+		else if (Math::Abs(tm->GetMapEntry((itemWalker->xPos / 32) +1, (itemWalker->yPos / 32))) >= 2 && itemWalker->dir == 1) {
+			itemWalker->move();
+		}
+		else if (Math::Abs(tm->GetMapEntry((itemWalker->xPos / 32) -1, (itemWalker->yPos / 32)))   >= 2 && itemWalker->dir == 2) {
+			itemWalker->move();
+		}
+		else if (Math::Abs(tm->GetMapEntry((itemWalker->xPos / 32), (itemWalker->yPos / 32) -1)  ) >= 2 && itemWalker->dir == 3) {
+			itemWalker->move();
+		}
+		else {
+			deleteProj(itemWalker);
+		}
+		itemWalker = itemWalker->Next;
+	}
+}
 
-int NPCList::countNPC()
+int ProjectileList::countProj()
 {
-	NPC^ itemWalker = head;
+	Projectile^ itemWalker = head;
 	int count = 0;
 	while (itemWalker != nullptr) {
 		count++;
@@ -81,28 +102,9 @@ int NPCList::countNPC()
 	}
 	return count;
 }
-void NPCList::genStates(int _x, int _y)
+bool ProjectileList::Collide(int _x, int _y)
 {
-	NPC^ itemWalker = head;
-	int count = 0;
-	while (itemWalker != nullptr) {
-		itemWalker->genState(_x, _y);
-		itemWalker = itemWalker->Next;
-	}
-}
-int NPCList::doActions(int _x, int _y)
-{
-	NPC^ itemWalker = head;
-	int dmg  = 0;
-	while (itemWalker != nullptr) {
-		dmg += itemWalker->action(_x, _y);
-		itemWalker = itemWalker->Next;
-	}
-	return dmg;
-}
-bool NPCList::Collide(int _x, int _y)
-{
-	NPC^ itemWalker = head;
+	Projectile^ itemWalker = head;
 
 	while (itemWalker != nullptr) {
 		if (itemWalker->xPos == _x && itemWalker->yPos == _y) {

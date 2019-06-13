@@ -10,6 +10,9 @@ GameEngine::GameEngine(Graphics^ _canvas)
 	moveFrame = 15;
 	canvas = _canvas;
 	fill = gcnew SolidBrush(Color::Aqua);
+	p1 = gcnew Bitmap("p1.bmp");
+	Color tC = p1->GetPixel(0, 0);
+	p1->MakeTransparent();
 }
 void GameEngine::Lose() {
 
@@ -52,12 +55,19 @@ void GameEngine::seedGen(String^ inpString) {
 	 vP->ViewportDraw();
 	 iL->drawItems(vP->ViewportWorldX, vP->ViewportWorldY);
 	 nL->drawNPC(vP->ViewportWorldX, vP->ViewportWorldY);
+	 if (pL->Collide(pC->xPos, pC->yPos)) {
+		 Projectile^ hitP = pL->projAt(pC->xPos, pC->yPos);
+		 score -= hitP->dmg;
+		 pL->deleteProj(hitP);
+	 }
+	 //pL->KillDead
+	 pL->drawProj(vP->ViewportWorldX, vP->ViewportWorldY);
 	 pC->forceDraw(400, 304);
- }
+ } 
  /*Adds all tiles to the tileset*/
  void GameEngine::TileInit() {
 	 Tile^ cobble = gcnew Tile(gcnew Bitmap("cobble.bmp"), true);
-	 Tile^ flower = gcnew Tile(gcnew Bitmap("flower.bmp"), false);
+	 Tile^ flower = gcnew Tile(gcnew Bitmap("wall.bmp"), false);
 	 Tile^ grass = gcnew Tile(gcnew Bitmap("floor0.bmp"), true);
 	 Tile^ blank = gcnew Tile(gcnew Bitmap(32, 32), false);
 	 ts = gcnew TileSet(4);
@@ -71,6 +81,7 @@ void GameEngine::seedGen(String^ inpString) {
 	 tm = gcnew TileMap(ts, canvas, NROWS, NCOLS);
 	 iL = gcnew ItemList(tm);
 	 nL = gcnew NPCList(tm);
+	 pL = gcnew ProjectileList(tm);
 	 tm->GenerateMap(NROWS, NCOLS);  //BIG Function in TileMap.c
  }
  /*Handles player Initialisation*/
@@ -100,7 +111,7 @@ void GameEngine::seedGen(String^ inpString) {
 					 iL->addItem(gcnew Item(canvas, coin, 16, 16, 1, i * 32, j * 32, 1));
 				 }
 				 else if (rand() % 200 == 0) {
-					 nL->addNPC(gcnew NPC(canvas, camera, 32, 32, 1, i * 32, j * 32, 1));
+					 nL->addNPC(gcnew NPC(canvas, camera, 32, 32, 1, i * 32, j * 32, 1,tm));
 				 }
 			 }
 		 }
@@ -142,9 +153,14 @@ void GameEngine::seedGen(String^ inpString) {
  }
  /** Handles what to do on Key Down Events */
  void GameEngine::Keys(KeyEventArgs^ e) {
-	 e->SuppressKeyPress = true;
+	
 	 if (state == 1) {//If in gameplay
-		 if (moveFrame == 15 && score > 0) {//if you can spend a point to move, and you arent already moving
+		 e->SuppressKeyPress = true;
+		 
+		 if (moveFrame == 15 && score > 0) {
+			 nL->genStates(pC->xPos, pC->yPos);
+			 score -= nL->doActions(pC->xPos, pC->yPos);
+			 //if you can spend a point to move, and you arent already moving
 			 if (e->KeyData == Keys::A) {//if you can move to the left sided tile
 				 if (nL->Collide(pC->xPos - 32, pC->yPos)) {
 					 pC->rotate(2);
@@ -204,17 +220,24 @@ void GameEngine::seedGen(String^ inpString) {
 					 pC->rotate(0);
 				 }
 			 }
-			 if (e->KeyData == Keys::Space) {//Skip turn
-				 score--;
-			 }
+			 
 
 			 //Check after picking up items if you lose
+			 
+		
+			if (e->KeyData == Keys::Space) {//Skip turn
+				score--;
+				pL->addProj(gcnew Projectile(canvas, p1, 16, 16, 1, pC->xPos, pC->yPos, 1, 1, pC->direction));
+			}
 			 if (score == 0) {
 				 Lose();
 			 }
-			 //STOPS SYSTEM ALERTS
-			 e->Handled = true;
-			 e->SuppressKeyPress = true;
+
+			
+			 pL->moveProj();
+			 
+			 
+			
 		 }
 	 }
 

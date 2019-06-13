@@ -20,11 +20,12 @@ public:
 	void boundsCheck();
 	void discover(TileMap^ tm, int nCols, int nRows);
 	property int xPos;
+	property int direction;
 	property int yPos;
 	void rotate(int _direction);
 private:
 
-	int direction;
+
 	int currentFrame;
 	int frameHeight;
 	int frameWidth;

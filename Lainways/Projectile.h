@@ -1,5 +1,4 @@
 #pragma once
-#include "Tilemap.h"
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
@@ -7,32 +6,31 @@ using namespace System::Windows::Forms;
 using namespace System::Data;
 using namespace System::Drawing;
 
-ref class NPC
+ref class Projectile
 {
 private:
 
 	int frameHeight;
 	int frameWidth;
 	int nFrames;
-	int state;
 	int currentFrame;
 	Graphics^ canvas;
 	Bitmap^ spriteSheet;
-	TileMap^ tm;
-
 public:
-	NPC^ Next;
+	Projectile^ Next;
 	property int xPos;
 	property int yPos;
 	property int Type;
-	property int health;
+	property int dmg;
+	property int speed;
+	property int dir;
+	property bool alive;
+
 
 public:
-	NPC(Graphics^ _canvas, Bitmap^ _spriteSheet, int _frameWidth, int _frameHeight, int _nFrames, int _xPos, int _yPos, int type, TileMap^ _tm);
+	Projectile(Graphics^ _canvas, Bitmap^ _spriteSheet, int _frameWidth, int _frameHeight, int _nFrames, int _xPos, int _yPos, int _speed, int _dmg, int _dir);
 	void draw(int _xVP, int _yVP);
 	void updateFrame();
-	void genState(int _x, int _y);
-	int direction;
-	int action(int _x, int _y);
+	void move();
 };
 

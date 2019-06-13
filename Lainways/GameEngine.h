@@ -3,6 +3,7 @@
 #include "TileSet.h"
 #include "Player.h"
 #include "Viewport.h"
+#include "ProjectileList.h"
 #include "ItemList.h"
 #include "NPCList.h"
 using namespace System;
@@ -22,6 +23,8 @@ private:
 	TileMap^ tm;
 	ItemList^ iL;
 	NPCList^ nL;
+	ProjectileList^ pL;
+	Bitmap^ p1;
 	int moveFrame;
 	int moveDirection;
 	
