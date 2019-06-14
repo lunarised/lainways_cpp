@@ -28,7 +28,7 @@ Used as a Programming Project for my Bachelor of IT at Otago Polytechnic
 * No GameOver  screen
 
 
-=======
+---
 ## Controls
 * WASD -> Movement
 * Space -> Shoot Projectile
