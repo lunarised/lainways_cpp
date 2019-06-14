@@ -7,25 +7,28 @@ Used as a Programming Project for my Bachelor of IT at Otago Polytechnic
 
 
 ## To Do
-* Implement Tile Map
-* Implement Player Character
-* Implement 
-
+* Fix AI 
+* Fix Projectile collision
+* Fix NPC Collision
+* Fix Random Crash
+* Game Over Screen
 
 ## Future To-Do
 * Rewrite in GNU C++ or C
-* Add Functionality
 * Implement in [Reimi](https://git.lain.church/tA/reimi "Reimi Roguelike Engine")
+* Replace all linked lists with std vectors
 
 
-## Currently Implemented
-* Start Screen
-* Random Corp Generator
-* Random seed Generator for String Seed Input
+
+## Known Bugs
+* NPC's do not collide with eachother correctly
+* NPC's are not damaged by projectiles
+* Has crashed occasionally on new map generation. May have stopped
+* NPC's may not draw mid state
+* No GameOver  screen
+
 
 =======
-* Implemented Basic Tiles
-* Implemented Tile Sets
-* Implemented Double Buffering
-* Icons
-
+## Controls
+* WASD -> Movement
+* Space -> Shoot Projectile

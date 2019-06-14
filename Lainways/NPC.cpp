@@ -127,16 +127,16 @@ int NPC::action(int _x, int _y) {
 		else {
 			direction = yDir;
 		}
-		if (Math::Abs(tm->GetMapEntry((xPos / 32), (yPos / 32) - 1)) >= 2 && direction == 0) {
+		if (Math::Abs(tm->GetMapEntry((xPos / 32), (yPos / 32) - 1)) >= 2 && direction == 3) {
 			yPos -= 32;
 		}
-		else if (Math::Abs(tm->GetMapEntry((xPos / 32) - 1, (yPos / 32))) >= 2 && direction == 1) {
+		else if (Math::Abs(tm->GetMapEntry((xPos / 32) - 1, (yPos / 32))) >= 2 && direction == 2) {
 				xPos -= 32;
 		}
-		else if (Math::Abs(tm->GetMapEntry((xPos / 32) + 1, (yPos / 32))) >= 2 && direction == 2) {	
+		else if (Math::Abs(tm->GetMapEntry((xPos / 32) + 1, (yPos / 32))) >= 2 && direction == 1) {	
 				xPos += 32;
 		}
-		else if (Math::Abs(tm->GetMapEntry((xPos / 32), (yPos / 32) + 1)) >= 2 && direction == 3) {
+		else if (Math::Abs(tm->GetMapEntry((xPos / 32), (yPos / 32) + 1)) >= 2 && direction == 0) {
 				yPos += 32;
 		}
 	}

@@ -1,4 +1,5 @@
-﻿  NPC.cpp
-d:\it\prog4\mckeja4\lainways\lainways\npc.cpp(161): warning C4715: 'NPC::action': not all control paths return a value
+﻿  GameEngine.cpp
+d:\it\prog4\mckeja4\lainways\lainways\gameengine.cpp(36): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+d:\it\prog4\mckeja4\lainways\lainways\gameengine.cpp(144): warning C4700: uninitialized local variable 'pX' used
   GameEngine.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   Lainways.vcxproj -> D:\IT\Prog4\mckeja4\Lainways\Debug\Lainways.exe

@@ -154,7 +154,7 @@ void GameEngine::seedGen(String^ inpString) {
 				 if (rand() % 40 == 0) {//1 in 40 tiles should have a coin on them
 					 iL->addItem(gcnew Item(canvas, coin, 16, 16, 1, i * 32, j * 32, 1));
 				 }
-				 else if (rand() % 200 == 0) {
+				 else if (rand() % 100 == 0) {
 					 nL->addNPC(gcnew NPC(canvas, camera, 32, 32, 1, i * 32, j * 32, 1,tm));
 				 }
 			 }
