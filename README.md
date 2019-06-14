@@ -4,6 +4,7 @@ A Visual C++ roguelike, inspired by Serial Experiments Lain
 
 
 Used as a Programming Project for my Bachelor of IT at Otago Polytechnic
+
 ---
 
 ## To Do
