@@ -15,7 +15,7 @@ Used as a Programming Project for my Bachelor of IT at Otago Polytechnic
 * Game Over Screen
 
 ## Future To-Do
-* Rewrite in GNU C++ or C
+* Rewrite in Rust
 * Implement in [Reimi](https://git.lain.church/tA/reimi "Reimi Roguelike Engine")
 * Replace all linked lists with std vectors
 
@@ -33,3 +33,4 @@ Used as a Programming Project for my Bachelor of IT at Otago Polytechnic
 ## Controls
 * WASD -> Movement
 * Space -> Shoot Projectile
+
