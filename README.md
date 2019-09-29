@@ -13,6 +13,7 @@ Used as a Programming Project for my Bachelor of IT at Otago Polytechnic
 * Fix NPC Collision
 * Fix Random Crash
 * Game Over Screen
+* Rust
 
 ## Future To-Do
 * Rewrite in Rust
